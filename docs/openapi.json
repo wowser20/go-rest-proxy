@@ -1,0 +1,110 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+      "title": "REST Proxy API",
+      "description": "Documentation for REST Proxy API",
+      "termsOfService": "https://github.com/wowser20",
+      "contact": {
+        "name": "Andrea Ella Remoreras",
+        "email": "remoreras.ae@gmail.com"
+      },
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://api-rest-proxy/v1",
+        "description": "Production"
+      },
+      {
+        "url": "https://staging-api-rest-proxy/v1",
+        "description": "Staging"
+      },
+      {
+        "url": "http://localhost:8000/v1",
+        "description": "Local"
+      }
+    ],
+    "tags": [
+      {
+        "name": "record",
+        "description": "Record service"
+      }
+    ],
+    "paths": {
+      "/record": {
+        "post": {
+          "tags": ["record"],
+          "summary": "Create Record",
+          "description": "Creates a record",
+          "requestBody": {
+            "description": "Creates a record request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateRecordRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "2xx": {
+              "description": "Success"
+            },
+            "4xx": {
+              "description": "Client side errors"
+            },
+            "5xx": {
+              "description": "Server side errors"
+            }
+          }
+        }
+      },
+      "/record/{id}": {
+        "get": {
+          "tags": ["record"],
+          "summary": "Get Record By ID",
+          "description": "Get record by its id",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Record id",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "2xx": {
+              "description": "Success"
+            },
+            "4xx": {
+              "description": "Client side errors"
+            },
+            "5xx": {
+              "description": "Server side errors"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "CreateRecordRequest": {
+          "required": ["id", "data"],
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "data": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+  
