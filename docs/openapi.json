@@ -12,41 +12,30 @@
     },
     "servers": [
       {
-        "url": "https://api-rest-proxy/v1",
+        "url": "https://api-rest-proxy/api/v1",
         "description": "Production"
       },
       {
-        "url": "https://staging-api-rest-proxy/v1",
+        "url": "https://staging-api-rest-proxy/api/v1",
         "description": "Staging"
       },
       {
-        "url": "http://localhost:8000/v1",
+        "url": "http://localhost:8000/api/v1",
         "description": "Local"
       }
     ],
     "tags": [
       {
-        "name": "record",
-        "description": "Record service"
+        "name": "product",
+        "description": "Product service"
       }
     ],
     "paths": {
-      "/record": {
-        "post": {
-          "tags": ["record"],
-          "summary": "Create Record",
-          "description": "Creates a record",
-          "requestBody": {
-            "description": "Creates a record request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateRecordRequest"
-                }
-              }
-            },
-            "required": true
-          },
+      "/product/all": {
+        "get": {
+          "tags": ["product"],
+          "summary": "Get All Product",
+          "description": "Gets all product from dummy json",
           "responses": {
             "2xx": {
               "description": "Success"
@@ -60,16 +49,16 @@
           }
         }
       },
-      "/record/{id}": {
+      "/product/{productID}": {
         "get": {
-          "tags": ["record"],
-          "summary": "Get Record By ID",
-          "description": "Get record by its id",
+          "tags": ["product"],
+          "summary": "Get Product By ID",
+          "description": "Get product by its id",
           "parameters": [
             {
-              "name": "id",
+              "name": "productID",
               "in": "path",
-              "description": "Record id",
+              "description": "product id",
               "required": true,
               "schema": {
                 "type": "string"

@@ -2,7 +2,6 @@ package rest
 
 import (
 	"fmt"
-	"go-rest-proxy/internal/viewmodels"
 	"log"
 	"net/http"
 	"os"
@@ -11,6 +10,10 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+
+	"go-rest-proxy/interfaces/rest/middlewares/cors"
+	"go-rest-proxy/internal/viewmodels"
+	"go-rest-proxy/module/product/handler"
 )
 
 // InitializeRouter initializes router and routes
@@ -23,6 +26,7 @@ func InitializeRouter() *chi.Mux {
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Recoverer)
 	r.Use(middleware.Logger)
+	r.Use(cors.Init().Handler)
 
 	// default route
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
@@ -44,7 +48,13 @@ func InitializeRouter() *chi.Mux {
 	r.Group(func(r chi.Router) {
 		r.Route("/api", func(r chi.Router) {
 			r.Route("/v1", func(r chi.Router) {
-				// place your routes here
+
+				r.Group(func(r chi.Router) {
+					r.Route("/product", func(r chi.Router) {
+						r.Get("/all", handler.GetDummyProductsHandler)
+						r.Get("/{productID}", handler.GetDummyProductByIDHandler)
+					})
+				})
 			})
 		})
 	})
@@ -52,12 +62,20 @@ func InitializeRouter() *chi.Mux {
 	return r
 }
 
+// TODO: log each endpoints
+// func LogEndpoints(router *chi.Mux) {
+// 	chi.Walk(router, func(method string, route string, handler http.Handler, middlewares ...func(http.Handler) http.Handler) error {
+// 		log.Printf("[%s]: '%s' has %d middlewares\n", method, route, len(middlewares))
+// 		return nil
+// 	})
+// }
+
 // Serve will start serving and listening to router
 func Serve(port int) {
-	log.Printf("[SERVER] REST server running on :%d", port)
+	log.Printf("[PROXY-SERVER] REST server running on :%d", port)
 	err := http.ListenAndServe(fmt.Sprintf(":%d", port), InitializeRouter())
 	if err != nil {
-		log.Fatalf("[SERVER] REST server failed %v", err)
+		log.Fatalf("[PROXY-SERVER] REST server failed %v", err)
 	}
 }
 
