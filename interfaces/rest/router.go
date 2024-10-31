@@ -10,10 +10,13 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/jwtauth"
 
 	"go-rest-proxy/interfaces/rest/middlewares/cors"
+	jwt "go-rest-proxy/interfaces/rest/middlewares/iam"
 	"go-rest-proxy/internal/viewmodels"
-	"go-rest-proxy/module/product/handler"
+	iamHandler "go-rest-proxy/module/iam/handler"
+	productHandler "go-rest-proxy/module/product/handler"
 )
 
 // InitializeRouter initializes router and routes
@@ -48,11 +51,22 @@ func InitializeRouter() *chi.Mux {
 	r.Group(func(r chi.Router) {
 		r.Route("/api", func(r chi.Router) {
 			r.Route("/v1", func(r chi.Router) {
+				tokenAuth := jwtauth.New("HS256", []byte(os.Getenv("JWT_SECRET")), nil)
+
+				// iam endpoints
+				r.Group(func(r chi.Router) {
+					r.Route("/iam", func(r chi.Router) {
+						r.Post("/generate-token", iamHandler.GenerateToken)
+					})
+				})
 
 				r.Group(func(r chi.Router) {
+					r.Use(jwtauth.Verifier(tokenAuth))
+					r.Use(jwt.JWTAuthMiddleware)
+
 					r.Route("/product", func(r chi.Router) {
-						r.Get("/all", handler.GetDummyProductsHandler)
-						r.Get("/{productID}", handler.GetDummyProductByIDHandler)
+						r.Get("/all", productHandler.GetDummyProductsHandler)
+						r.Get("/{productID}", productHandler.GetDummyProductByIDHandler)
 					})
 				})
 			})
