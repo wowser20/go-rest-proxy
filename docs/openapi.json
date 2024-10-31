@@ -12,15 +12,15 @@
   },
   "servers": [
     {
-      "url": "https://api-rest-proxy/api/v1",
+      "url": "https://api-rest-proxy/v1",
       "description": "Production"
     },
     {
-      "url": "https://staging-api-rest-proxy/api/v1",
+      "url": "https://staging-api-rest-proxy/v1",
       "description": "Staging"
     },
     {
-      "url": "http://localhost:8000/api/v1",
+      "url": "http://localhost:8000/v1",
       "description": "Local"
     }
   ],

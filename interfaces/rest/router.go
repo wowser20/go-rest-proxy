@@ -49,25 +49,23 @@ func InitializeRouter() *chi.Mux {
 
 	// API routes
 	r.Group(func(r chi.Router) {
-		r.Route("/api", func(r chi.Router) {
-			r.Route("/v1", func(r chi.Router) {
-				tokenAuth := jwtauth.New("HS256", []byte(os.Getenv("JWT_SECRET")), nil)
+		r.Route("/v1", func(r chi.Router) {
+			tokenAuth := jwtauth.New("HS256", []byte(os.Getenv("JWT_SECRET")), nil)
 
-				// iam endpoints
-				r.Group(func(r chi.Router) {
-					r.Route("/iam", func(r chi.Router) {
-						r.Post("/generate-token", iamHandler.GenerateToken)
-					})
+			// iam endpoints
+			r.Group(func(r chi.Router) {
+				r.Route("/iam", func(r chi.Router) {
+					r.Post("/generate-token", iamHandler.GenerateToken)
 				})
+			})
 
-				r.Group(func(r chi.Router) {
-					r.Use(jwtauth.Verifier(tokenAuth))
-					r.Use(jwt.JWTAuthMiddleware)
+			r.Group(func(r chi.Router) {
+				r.Use(jwtauth.Verifier(tokenAuth))
+				r.Use(jwt.JWTAuthMiddleware)
 
-					r.Route("/product", func(r chi.Router) {
-						r.Get("/all", productHandler.GetDummyProductsHandler)
-						r.Get("/{productID}", productHandler.GetDummyProductByIDHandler)
-					})
+				r.Route("/product", func(r chi.Router) {
+					r.Get("/all", productHandler.GetDummyProductsHandler)
+					r.Get("/{productID}", productHandler.GetDummyProductByIDHandler)
 				})
 			})
 		})
