@@ -18,7 +18,7 @@ func GenerateToken(w http.ResponseWriter, r *http.Request) {
 	accessTokenClaims := jwt.MapClaims{
 		"iss": "rest-proxy",
 		"iat": time.Now().Unix(),
-		"exp": time.Now().Add(time.Minute * 15).Unix(),
+		"exp": time.Now().Add(time.Minute * 15).Unix(), // 15 minutes expiration
 	}
 
 	at := jwt.NewWithClaims(jwt.SigningMethodHS256, accessTokenClaims)
