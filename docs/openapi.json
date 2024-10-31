@@ -1,99 +1,138 @@
 {
-    "openapi": "3.0.2",
-    "info": {
-      "title": "REST Proxy API",
-      "description": "Documentation for REST Proxy API",
-      "termsOfService": "https://github.com/wowser20",
-      "contact": {
-        "name": "Andrea Ella Remoreras",
-        "email": "remoreras.ae@gmail.com"
-      },
-      "version": "1.0.0"
+  "openapi": "3.0.2",
+  "info": {
+    "title": "REST Proxy API",
+    "description": "Documentation for REST Proxy API",
+    "termsOfService": "https://github.com/wowser20",
+    "contact": {
+      "name": "Andrea Ella Remoreras",
+      "email": "remoreras.ae@gmail.com"
     },
-    "servers": [
-      {
-        "url": "https://api-rest-proxy/api/v1",
-        "description": "Production"
-      },
-      {
-        "url": "https://staging-api-rest-proxy/api/v1",
-        "description": "Staging"
-      },
-      {
-        "url": "http://localhost:8000/api/v1",
-        "description": "Local"
-      }
-    ],
-    "tags": [
-      {
-        "name": "product",
-        "description": "Product service"
-      }
-    ],
-    "paths": {
-      "/product/all": {
-        "get": {
-          "tags": ["product"],
-          "summary": "Get All Product",
-          "description": "Gets all product from dummy json",
-          "responses": {
-            "2xx": {
-              "description": "Success"
-            },
-            "4xx": {
-              "description": "Client side errors"
-            },
-            "5xx": {
-              "description": "Server side errors"
-            }
-          }
-        }
-      },
-      "/product/{productID}": {
-        "get": {
-          "tags": ["product"],
-          "summary": "Get Product By ID",
-          "description": "Get product by its id",
-          "parameters": [
-            {
-              "name": "productID",
-              "in": "path",
-              "description": "product id",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "2xx": {
-              "description": "Success"
-            },
-            "4xx": {
-              "description": "Client side errors"
-            },
-            "5xx": {
-              "description": "Server side errors"
-            }
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api-rest-proxy/v1",
+      "description": "Production"
+    },
+    {
+      "url": "https://staging-api-rest-proxy/v1",
+      "description": "Staging"
+    },
+    {
+      "url": "http://localhost:8000/v1",
+      "description": "Local"
+    }
+  ],
+  "tags": [
+    {
+      "name": "iam",
+      "description": "IAM service"
+    },
+    {
+      "name": "product",
+      "description": "Product service"
+    }
+  ],
+  "paths": {
+    "/iam/generate-token": {
+      "post": {
+        "tags": ["iam"],
+        "summary": "Generate Token",
+        "description": "Generate token for authentication",
+        "responses": {
+          "2xx": {
+            "description": "Success"
+          },
+          "4xx": {
+            "description": "Client side errors"
+          },
+          "5xx": {
+            "description": "Server side errors"
           }
         }
       }
     },
-    "components": {
-      "schemas": {
-        "CreateRecordRequest": {
-          "required": ["id", "data"],
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "data": {
+    "/product/all": {
+      "get": {
+        "tags": ["product"],
+        "summary": "Get All Product",
+        "description": "Gets all product from dummy json",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "2xx": {
+            "description": "Success"
+          },
+          "4xx": {
+            "description": "Client side errors"
+          },
+          "5xx": {
+            "description": "Server side errors"
+          }
+        }
+      }
+    },
+    "/product/{productID}": {
+      "get": {
+        "tags": ["product"],
+        "summary": "Get Product By ID",
+        "description": "Get product by its id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "productID",
+            "in": "path",
+            "description": "product id",
+            "required": true,
+            "schema": {
               "type": "string"
             }
+          }
+        ],
+        "responses": {
+          "2xx": {
+            "description": "Success"
+          },
+          "4xx": {
+            "description": "Client side errors"
+          },
+          "5xx": {
+            "description": "Server side errors"
           }
         }
       }
     }
+  },
+  "components": {
+    "schemas": {
+      "CreateRecordRequest": {
+        "required": ["id", "data"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Session token"
+      }
+    }
   }
-  
+}
