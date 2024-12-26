@@ -64,17 +64,3 @@ func GetDummyProducts() (types.GetDummyProductsResponse, error) {
 
 	return result, nil
 }
-
-	resp, err := client.Do(req)
-	if err != nil {
-		return err
-	}
-
-	defer resp.Body.Close()
-
-	if err := json.NewDecoder(resp.Body).Decode(&response); err != nil {
-		return err
-	}
-
-	return nil
-}

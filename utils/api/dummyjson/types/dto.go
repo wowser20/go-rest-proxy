@@ -1,3 +1,4 @@
+package types
 
 type GetDummyProductByIDResponse struct {
 	ID                 int      `json:"id"`
