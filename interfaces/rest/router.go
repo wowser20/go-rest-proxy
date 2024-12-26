@@ -15,6 +15,7 @@ import (
 	"go-rest-proxy/interfaces/rest/middlewares/cors"
 	jwt "go-rest-proxy/interfaces/rest/middlewares/iam"
 	"go-rest-proxy/internal/viewmodels"
+	cartHandler "go-rest-proxy/module/cart/handler"
 	iamHandler "go-rest-proxy/module/iam/handler"
 	productHandler "go-rest-proxy/module/product/handler"
 )
@@ -63,6 +64,11 @@ func InitializeRouter() *chi.Mux {
 				r.Use(jwtauth.Verifier(tokenAuth))
 				r.Use(jwt.JWTAuthMiddleware)
 
+				// cart endpoints
+				r.Route("/cart", func(r chi.Router) {
+					r.Get("/list", cartHandler.GetDummyCarts)
+					r.Get("/{id}", cartHandler.GetDummyCartByID)
+				})
 
 				// product endpoints
 				r.Route("/product", func(r chi.Router) {
