@@ -63,9 +63,11 @@ func InitializeRouter() *chi.Mux {
 				r.Use(jwtauth.Verifier(tokenAuth))
 				r.Use(jwt.JWTAuthMiddleware)
 
+
+				// product endpoints
 				r.Route("/product", func(r chi.Router) {
-					r.Get("/all", productHandler.GetDummyProductsHandler)
-					r.Get("/{productID}", productHandler.GetDummyProductByIDHandler)
+					r.Get("/list", productHandler.GetDummyProducts)
+					r.Get("/{id}", productHandler.GetDummyProductByID)
 				})
 			})
 		})

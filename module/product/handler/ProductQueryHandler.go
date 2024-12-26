@@ -2,20 +2,18 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/go-chi/chi"
 
 	"go-rest-proxy/internal/errors"
 	"go-rest-proxy/internal/viewmodels"
-	"go-rest-proxy/module/product/handler/types"
 	"go-rest-proxy/utils/api/dummyjson"
 )
 
-// GetDummyProductsHandler handler for getting all products from dummyjson
-func GetDummyProductsHandler(w http.ResponseWriter, r *http.Request) {
-	var result types.GetProductsResponse
-
-	err := dummyjson.GetDummyProducts(&result)
+// GetDummyProducts gets all products
+func GetDummyProducts(w http.ResponseWriter, r *http.Request) {
+	result, err := dummyjson.GetDummyProducts()
 	if err != nil {
 		response := viewmodels.HTTPResponseVM{
 			Status:    http.StatusBadRequest,
@@ -38,13 +36,24 @@ func GetDummyProductsHandler(w http.ResponseWriter, r *http.Request) {
 	response.JSON(w)
 }
 
-// GetDummyProductsHandler handler for getting all products from dummyjson
-func GetDummyProductByIDHandler(w http.ResponseWriter, r *http.Request) {
-	id := chi.URLParam(r, "productID")
+// GetDummyProductByID gets a product by id
+func GetDummyProductByID(w http.ResponseWriter, r *http.Request) {
+	id := chi.URLParam(r, "id")
 
-	var result types.GetProductByIDResponse
+	productID, err := strconv.Atoi(id)
+	if err != nil {
+		response := viewmodels.HTTPResponseVM{
+			Status:    http.StatusBadRequest,
+			Success:   false,
+			Message:   "Invalid product ID.",
+			ErrorCode: errors.InvalidPayload,
+		}
 
-	err := dummyjson.GetDummyProductByID(id, &result)
+		response.JSON(w)
+		return
+	}
+
+	result, err := dummyjson.GetDummyProductByID(productID)
 	if err != nil {
 		response := viewmodels.HTTPResponseVM{
 			Status:    http.StatusBadRequest,

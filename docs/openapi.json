@@ -53,7 +53,7 @@
         }
       }
     },
-    "/product/all": {
+    "/product/list": {
       "get": {
         "tags": ["product"],
         "summary": "Get All Product",
@@ -76,7 +76,7 @@
         }
       }
     },
-    "/product/{productID}": {
+    "/product/{id}": {
       "get": {
         "tags": ["product"],
         "summary": "Get Product By ID",
@@ -88,12 +88,12 @@
         ],
         "parameters": [
           {
-            "name": "productID",
+            "name": "id",
             "in": "path",
             "description": "product id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
