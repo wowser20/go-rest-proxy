@@ -64,3 +64,53 @@ func GetDummyProducts() (types.GetDummyProductsResponse, error) {
 
 	return result, nil
 }
+
+// GetDummyCarts get all dummy carts from dummy json
+func GetDummyCarts() (types.GetDummyCartsResponse, error) {
+	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("%s/carts", os.Getenv("DUMMY_JSON_BASE_URL")), nil)
+	if err != nil {
+		return types.GetDummyCartsResponse{}, err
+	}
+
+	// call dummy json api
+	resp, err := client.Do(req)
+	if err != nil {
+		return types.GetDummyCartsResponse{}, err
+	}
+
+	defer resp.Body.Close()
+
+	var result types.GetDummyCartsResponse
+
+	// decode response to json
+	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		return types.GetDummyCartsResponse{}, err
+	}
+
+	return result, nil
+}
+
+// GetDummyCartByID get dummy cart from dummy json by id
+func GetDummyCartByID(cartID int) (types.GetDummyCartByIDResponse, error) {
+	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("%s/carts/%v", os.Getenv("DUMMY_JSON_BASE_URL"), cartID), nil)
+	if err != nil {
+		return types.GetDummyCartByIDResponse{}, err
+	}
+
+	// call dummy json api
+	resp, err := client.Do(req)
+	if err != nil {
+		return types.GetDummyCartByIDResponse{}, err
+	}
+
+	defer resp.Body.Close()
+
+	var result types.GetDummyCartByIDResponse
+
+	// decode response to json
+	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		return types.GetDummyCartByIDResponse{}, err
+	}
+
+	return result, nil
+}

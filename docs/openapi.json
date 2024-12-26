@@ -26,15 +26,76 @@
   ],
   "tags": [
     {
+      "name": "cart",
+      "description": "Cart endpoints"
+    },
+    {
       "name": "iam",
-      "description": "IAM service"
+      "description": "IAM endpoints"
     },
     {
       "name": "product",
-      "description": "Product service"
+      "description": "Product endpoints"
     }
   ],
   "paths": {
+    "/cart/list": {
+      "get": {
+        "tags": ["cart"],
+        "summary": "Get All Carts",
+        "description": "Gets all carts from dummy json",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "2xx": {
+            "description": "Success"
+          },
+          "4xx": {
+            "description": "Client side errors"
+          },
+          "5xx": {
+            "description": "Server side errors"
+          }
+        }
+      }
+    },
+    "/cart/{id}": {
+      "get": {
+        "tags": ["cart"],
+        "summary": "Get Cart By ID",
+        "description": "Get cart by its id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "cart id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "2xx": {
+            "description": "Success"
+          },
+          "4xx": {
+            "description": "Client side errors"
+          },
+          "5xx": {
+            "description": "Server side errors"
+          }
+        }
+      }
+    },
     "/iam/generate-token": {
       "post": {
         "tags": ["iam"],
