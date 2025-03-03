@@ -1,3 +1,5 @@
+include .env
+
 # set default shell
 SHELL = bash -e -o pipefail
 
