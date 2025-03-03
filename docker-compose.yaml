@@ -1,0 +1,18 @@
+services:
+  celeste:
+    build: .
+    container_name: ${API_NAME}
+    mem_limit: "3g"
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+    networks:
+      - proxy
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+ 
+networks:
+  proxy:
+    external: true
