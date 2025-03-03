@@ -22,7 +22,7 @@ lint:
 .PHONY:	build
 build:
 	mkdir -p bin
-	go build -race -o bin/go-rest-proxy \
+	go build -race -o bin/${API_NAME} \
 	    cmd/main.go
 
 .PHONY:	test
@@ -31,7 +31,7 @@ test:
 	
 .PHONY:	run
 run:	build
-	./bin/go-rest-proxy
+	./bin/${API_NAME}
 
 .PHONY: up
 up:
