@@ -1,7 +1,5 @@
 # go-rest-proxy
-Reference for creating proxy REST API's
-
-This test proxy uses https://dummyjson.com/ for testing
+- A simple forward proxy for securing requests, utilizes https://dummyjson.com/ for the dummy API responses.
 
 # How to run locally
 
