@@ -1,7 +1,7 @@
 # go-rest-proxy
 A simple forward proxy server intended for securing HTTP requests with JWT authorization, utilizes https://dummyjson.com/ for the dummy API responses.
 
-> What is a proxy?
+### What is a proxy?
 > A proxy server routes traffic between client(s) and external system, regulating it according to policies, masking IP addresses, enforcing security protocols, and blocking unknown traffic.
 
 # How to run locally
