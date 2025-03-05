@@ -1,6 +1,9 @@
 # go-rest-proxy
 A simple forward proxy intended for securing HTTP requests with jwt authorization, utilizes https://dummyjson.com/ for the dummy API responses.
 
+> What is a proxy?
+> A proxy server routes traffic between client(s) and external system, regulating it according to policies, masking IP addresses, enforcing security protocols, and blocking unknown traffic.
+
 # How to run locally
 
 Initialize the environment variables, .env file
