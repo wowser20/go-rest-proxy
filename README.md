@@ -1,5 +1,5 @@
 # go-rest-proxy
-- A simple forward proxy intended for securing HTTP requests with jwt authorization, utilizes https://dummyjson.com/ for the dummy API responses.
+A simple forward proxy intended for securing HTTP requests with jwt authorization, utilizes https://dummyjson.com/ for the dummy API responses.
 
 # How to run locally
 
