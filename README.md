@@ -4,6 +4,11 @@ A simple forward proxy server intended to secure client HTTP requests with JWT a
 ### What is a proxy?
 > A proxy, also called a forward proxy, routes traffic between clients and external system, regulating it according to policies, masking IP addresses, enforcing security protocols, and blocking unknown traffic.
 
+
+
+If you want to check the OpenAPI Documentation and test out the endpoints, you can visit the following URL:
+- https://staging-api-rest-proxy.aer-tech.org/docs/
+
 # How to run locally
 
 Initialize the environment variables, .env file
@@ -35,9 +40,6 @@ To test, run:
 ```bash
 make test
 ```
-
-
-TBD - URL for OpenAPI docs
 
 
 
