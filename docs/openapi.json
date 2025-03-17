@@ -16,7 +16,7 @@
       "description": "Production"
     },
     {
-      "url": "https://staging-api-rest-proxy/v1",
+      "url": "https://staging-api-rest-proxy.aer-tech.org/v1",
       "description": "Staging"
     },
     {

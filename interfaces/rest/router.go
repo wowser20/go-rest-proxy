@@ -82,14 +82,6 @@ func InitializeRouter() *chi.Mux {
 	return r
 }
 
-// TODO: log each endpoints
-// func LogEndpoints(router *chi.Mux) {
-// 	chi.Walk(router, func(method string, route string, handler http.Handler, middlewares ...func(http.Handler) http.Handler) error {
-// 		log.Printf("[%s]: '%s' has %d middlewares\n", method, route, len(middlewares))
-// 		return nil
-// 	})
-// }
-
 // Serve will start serving and listening to router
 func Serve(port int) {
 	log.Printf("[PROXY-SERVER] REST server running on :%d", port)
