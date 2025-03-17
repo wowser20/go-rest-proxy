@@ -6,8 +6,9 @@ A simple forward proxy server intended to secure client HTTP requests with JWT a
 
 
 
-If you want to check the OpenAPI Documentation and test out the endpoints, you can visit the following URL:
+If you want to check the OpenAPI Documentation and test out the endpoints, you can visit the following URL: 
 - https://staging-api-rest-proxy.aer-tech.org/docs/
+(make sure to use the staging url in the servers dropdown in the documentation)
 
 # How to run locally
 
