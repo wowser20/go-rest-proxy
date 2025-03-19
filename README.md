@@ -1,7 +1,7 @@
 # go-rest-proxy
 A simple forward proxy server intended to secure client HTTP requests with JWT authentication utilizes https://dummyjson.com/ for the dummy API responses.
 
-I made this to familiarize the proxy implementation using REST API architecture, also Domain Driven Design Pattern for the project structure, I haven't implemented dependency injection for this cause I want this to be as simple as possible since this is just a simple personal project for learning purposes.
+I made this to familiarize the proxy implementation using REST API for the endpoints, also Domain Driven Design Pattern for the project structure, I haven't implemented dependency injection for this cause I want this to be as simple as possible since this is just a simple personal project for learning purposes.
 
 ### What is a proxy?
 > A proxy, also called a forward proxy, routes traffic between clients and external system, regulating it according to policies, masking IP addresses, enforcing security protocols, and blocking unknown traffic.
