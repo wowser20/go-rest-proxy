@@ -34,7 +34,7 @@ make
 
 Then connect to this port, to locally access the OpenAPI documentation
 
-http://localhost:8000/docs
+http://localhost:8080/docs
 
 
 
