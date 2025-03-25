@@ -37,17 +37,4 @@ Then connect to this port, to locally access the OpenAPI documentation
 http://localhost:8000/docs
 
 
-To install, run:
-
-``` bash
-make install
-```
-
-To test, run:
-
-```bash
-make test
-```
-
-
 
