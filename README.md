@@ -33,9 +33,9 @@ make
 ```
 
 Then connect to this port, to locally access the OpenAPI documentation
-```bash
+
 localhost:8000/docs
-```
+
 
 To install, run:
 
