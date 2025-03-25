@@ -32,6 +32,11 @@ To run or start the proxy application: build, install, and run:
 make 
 ```
 
+Then connect to this port, to locally access the OpenAPI documentation
+```bash
+localhost:8000/docs
+```
+
 To install, run:
 
 ``` bash
