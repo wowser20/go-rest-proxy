@@ -33,7 +33,8 @@ func GetDummyProductByID(productID int) (types.GetDummyProductByIDResponse, erro
 	var result types.GetDummyProductByIDResponse
 
 	// decode response to json
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+	err = json.NewDecoder(resp.Body).Decode(&result)
+	if err != nil {
 		return types.GetDummyProductByIDResponse{}, err
 	}
 
@@ -58,7 +59,8 @@ func GetDummyProducts() (types.GetDummyProductsResponse, error) {
 	var result types.GetDummyProductsResponse
 
 	// decode response to json
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+	err = json.NewDecoder(resp.Body).Decode(&result)
+	if err != nil {
 		return types.GetDummyProductsResponse{}, err
 	}
 
@@ -83,7 +85,8 @@ func GetDummyCarts() (types.GetDummyCartsResponse, error) {
 	var result types.GetDummyCartsResponse
 
 	// decode response to json
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+	err = json.NewDecoder(resp.Body).Decode(&result)
+	if err != nil {
 		return types.GetDummyCartsResponse{}, err
 	}
 
@@ -108,7 +111,8 @@ func GetDummyCartByID(cartID int) (types.GetDummyCartByIDResponse, error) {
 	var result types.GetDummyCartByIDResponse
 
 	// decode response to json
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+	err = json.NewDecoder(resp.Body).Decode(&result)
+	if err != nil {
 		return types.GetDummyCartByIDResponse{}, err
 	}
 
