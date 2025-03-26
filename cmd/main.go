@@ -29,6 +29,5 @@ func main() {
 	}
 
 	// serve rest server
-	rest.InitializeRouter()
 	rest.Serve(restPort)
 }
