@@ -32,17 +32,9 @@ To run or start the proxy application: build, install, and run:
 make 
 ```
 
-To install, run:
+Then connect to this port, to locally access the OpenAPI documentation
 
-``` bash
-make install
-```
-
-To test, run:
-
-```bash
-make test
-```
+http://localhost:8080/docs
 
 
 
