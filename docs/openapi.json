@@ -50,14 +50,47 @@
           }
         ],
         "responses": {
-          "2xx": {
-            "description": "Success"
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/APIResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/GetDummyCartsResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           },
           "4xx": {
-            "description": "Client side errors"
+            "description": "Client side errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
           },
           "5xx": {
-            "description": "Server side errors"
+            "description": "Server side errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -102,14 +135,47 @@
         "summary": "Generate Token",
         "description": "Generate token for authentication",
         "responses": {
-          "2xx": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/APIResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/GenerateTokenResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           },
           "4xx": {
-            "description": "Client side errors"
+            "description": "Client side errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
           },
           "5xx": {
-            "description": "Server side errors"
+            "description": "Server side errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -125,14 +191,47 @@
           }
         ],
         "responses": {
-          "2xx": {
-            "description": "Success"
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/APIResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/GetDummyProductsResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           },
           "4xx": {
-            "description": "Client side errors"
+            "description": "Client side errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
           },
           "5xx": {
-            "description": "Server side errors"
+            "description": "Server side errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -159,14 +258,47 @@
           }
         ],
         "responses": {
-          "2xx": {
-            "description": "Success"
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/APIResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/GetDummyProductByIDResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           },
           "4xx": {
-            "description": "Client side errors"
+            "description": "Client side errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
           },
           "5xx": {
-            "description": "Server side errors"
+            "description": "Server side errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -174,15 +306,167 @@
   },
   "components": {
     "schemas": {
-      "CreateRecordRequest": {
-        "required": ["id", "data"],
+      "APIResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation successful"
+          },
+          "data": {
+            "type": "object",
+            "example": {}
+          }
+        }
+      },
+      "APIErrorResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "message": {
+            "type": "string",
+            "example": "Bad Request"
+          },
+          "errorCode": {
+            "type": "string",
+            "example": "BAD_REQUEST"
+          },
+          "data": {
+            "type": "object",
+            "example": {}
+          }
+        }
+      },
+      "GenerateTokenResponse": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          }
+        }
+      },
+      "GetDummyCartsResponse": {
+        "type": "object",
+        "properties": {
+          "carts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetDummyCartByIDResponse"
+            }
+          }
+        }
+      },
+      "GetDummyCartByIDResponse": {
         "type": "object",
         "properties": {
           "id": {
+            "type": "integer"
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number"
+                },
+                "quantity": {
+                  "type": "integer"
+                },
+                "total": {
+                  "type": "number"
+                },
+                "discountPercentage": {
+                  "type": "number"
+                },
+                "discountedTotal": {
+                  "type": "number"
+                },
+                "thumbnail": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "total": {
+            "type": "number"
+          },
+          "discountedTotal": {
+            "type": "number"
+          },
+          "userId": {
+            "type": "integer"
+          },
+          "totalProducts": {
+            "type": "integer"
+          },
+          "totalQuantity": {
+            "type": "integer"
+          }
+        }
+      },
+      "GetDummyProductByIDResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
             "type": "string"
           },
-          "data": {
+          "description": {
             "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "discountPercentage": {
+            "type": "number"
+          },
+          "rating": {
+            "type": "number"
+          },
+          "stock": {
+            "type": "integer"
+          },
+          "brand": {
+            "type": "string"
+          },
+          "thumbnail": {
+            "type": "string"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "GetDummyProductsResponse": {
+        "type": "object",
+        "properties": {
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetDummyProductByIDResponse"
+            }
           }
         }
       }
