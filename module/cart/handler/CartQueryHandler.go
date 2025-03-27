@@ -13,13 +13,25 @@ import (
 
 // GetDummyCarts gets all carts
 func GetDummyCarts(w http.ResponseWriter, r *http.Request) {
-	result, err := dummyjson.GetDummyCarts()
+	res, err := dummyjson.GetDummyCarts()
 	if err != nil {
+		var httpCode int
+		var errorMsg string
+
+		switch err.Error() {
+		case errors.DummyJsonError:
+			httpCode = http.StatusInternalServerError
+			errorMsg = "Error loading carts."
+		default:
+			httpCode = http.StatusInternalServerError
+			errorMsg = "Please contact technical support."
+		}
+
 		response := viewmodels.HTTPResponseVM{
-			Status:    http.StatusBadRequest,
+			Status:    httpCode,
 			Success:   false,
-			Message:   "Error loading carts.",
-			ErrorCode: errors.DummyJsonError,
+			Message:   errorMsg,
+			ErrorCode: err.Error(),
 		}
 
 		response.JSON(w)
@@ -30,7 +42,7 @@ func GetDummyCarts(w http.ResponseWriter, r *http.Request) {
 		Status:  http.StatusOK,
 		Success: true,
 		Message: "Successfully fetched all carts.",
-		Data:    result,
+		Data:    res,
 	}
 
 	response.JSON(w)
@@ -53,13 +65,25 @@ func GetDummyCartByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result, err := dummyjson.GetDummyCartByID(cartID)
+	res, err := dummyjson.GetDummyCartByID(cartID)
 	if err != nil {
+		var httpCode int
+		var errorMsg string
+
+		switch err.Error() {
+		case errors.DummyJsonError:
+			httpCode = http.StatusInternalServerError
+			errorMsg = "Error loading cart by id."
+		default:
+			httpCode = http.StatusInternalServerError
+			errorMsg = "Please contact technical support."
+		}
+
 		response := viewmodels.HTTPResponseVM{
-			Status:    http.StatusBadRequest,
+			Status:    httpCode,
 			Success:   false,
-			Message:   "Error loading cart by id.",
-			ErrorCode: errors.DummyJsonError,
+			Message:   errorMsg,
+			ErrorCode: err.Error(),
 		}
 
 		response.JSON(w)
@@ -70,7 +94,7 @@ func GetDummyCartByID(w http.ResponseWriter, r *http.Request) {
 		Status:  http.StatusOK,
 		Success: true,
 		Message: "Successfully fetched cart by id.",
-		Data:    result,
+		Data:    res,
 	}
 
 	response.JSON(w)

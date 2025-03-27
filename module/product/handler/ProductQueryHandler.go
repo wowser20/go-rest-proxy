@@ -15,11 +15,23 @@ import (
 func GetDummyProducts(w http.ResponseWriter, r *http.Request) {
 	result, err := dummyjson.GetDummyProducts()
 	if err != nil {
+		var httpCode int
+		var errorMsg string
+
+		switch err.Error() {
+		case errors.DummyJsonError:
+			httpCode = http.StatusInternalServerError
+			errorMsg = "Error loading products."
+		default:
+			httpCode = http.StatusInternalServerError
+			errorMsg = "Please contact technical support."
+		}
+
 		response := viewmodels.HTTPResponseVM{
-			Status:    http.StatusBadRequest,
+			Status:    httpCode,
 			Success:   false,
-			Message:   "Error loading products.",
-			ErrorCode: errors.DummyJsonError,
+			Message:   errorMsg,
+			ErrorCode: err.Error(),
 		}
 
 		response.JSON(w)
@@ -55,11 +67,23 @@ func GetDummyProductByID(w http.ResponseWriter, r *http.Request) {
 
 	result, err := dummyjson.GetDummyProductByID(productID)
 	if err != nil {
+		var httpCode int
+		var errorMsg string
+
+		switch err.Error() {
+		case errors.DummyJsonError:
+			httpCode = http.StatusInternalServerError
+			errorMsg = "Error loading product by id."
+		default:
+			httpCode = http.StatusInternalServerError
+			errorMsg = "Please contact technical support."
+		}
+
 		response := viewmodels.HTTPResponseVM{
-			Status:    http.StatusBadRequest,
+			Status:    httpCode,
 			Success:   false,
-			Message:   "Error loading product by id.",
-			ErrorCode: errors.DummyJsonError,
+			Message:   errorMsg,
+			ErrorCode: err.Error(),
 		}
 
 		response.JSON(w)

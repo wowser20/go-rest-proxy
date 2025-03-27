@@ -8,6 +8,6 @@ const (
 	// UnauthorizedAccess is the code for unauthorized access
 	UnauthorizedAccess string = "UNAUTHORIZED_ACCESS"
 
-	// dummy json related errors
-	DummyJsonError string = "DUMMY_JSON_ERROR"
+	// dummy json api related errors
+	DummyJsonError string = "DUMMY_JSON_API_ERROR"
 )
