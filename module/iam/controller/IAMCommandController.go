@@ -21,9 +21,9 @@ func (controller *IAMCommandController) GenerateToken(w http.ResponseWriter, r *
 		var errorMsg string
 
 		switch err.Error() {
-		case errors.DummyJsonError:
-			httpCode = http.StatusInternalServerError
-			errorMsg = "Error loading products."
+		case errors.UnauthorizedAccess:
+			httpCode = http.StatusUnauthorized
+			errorMsg = "Invalid credentials."
 		default:
 			httpCode = http.StatusInternalServerError
 			errorMsg = "Please contact technical support."
