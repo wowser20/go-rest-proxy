@@ -11,8 +11,7 @@ import (
 	apiError "go-rest-proxy/internal/errors"
 )
 
-type IAMCommandService struct {
-}
+type IAMCommandService struct{}
 
 // GenerateToken generate token
 func (service *IAMCommandService) GenerateToken() (string, error) {

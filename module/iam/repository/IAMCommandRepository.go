@@ -1,4 +1,3 @@
 package repository
 
-type IAMCommandRepository struct {
-}
+type IAMCommandRepository struct{}
