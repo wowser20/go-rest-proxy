@@ -1,1 +1,3 @@
-package handler
+package controller
+
+type ProductCommandController struct{}

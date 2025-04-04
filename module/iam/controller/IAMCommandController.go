@@ -2,33 +2,38 @@ package handler
 
 import (
 	"net/http"
-	"os"
-	"time"
-
-	"github.com/golang-jwt/jwt"
 
 	"go-rest-proxy/internal/errors"
 	"go-rest-proxy/internal/viewmodels"
 	"go-rest-proxy/module/iam/controller/types"
+	"go-rest-proxy/module/iam/service"
 )
 
-// GenerateToken generates a jwt token
-func GenerateToken(w http.ResponseWriter, r *http.Request) {
-	// create access token
-	accessTokenClaims := jwt.MapClaims{
-		"iss": "rest-proxy",
-		"iat": time.Now().Unix(),
-		"exp": time.Now().Add(time.Minute * 15).Unix(), // 15 minutes expiration
-	}
+type IAMCommandController struct {
+	service.IAMCommandService
+}
 
-	at := jwt.NewWithClaims(jwt.SigningMethodHS256, accessTokenClaims)
-	token, err := at.SignedString([]byte(os.Getenv("JWT_SECRET")))
+// GenerateToken generates a jwt token
+func (controller *IAMCommandController) GenerateToken(w http.ResponseWriter, r *http.Request) {
+	res, err := controller.IAMCommandService.GenerateToken()
 	if err != nil {
+		var httpCode int
+		var errorMsg string
+
+		switch err.Error() {
+		case errors.DummyJsonError:
+			httpCode = http.StatusInternalServerError
+			errorMsg = "Error loading products."
+		default:
+			httpCode = http.StatusInternalServerError
+			errorMsg = "Please contact technical support."
+		}
+
 		response := viewmodels.HTTPResponseVM{
-			Status:    http.StatusInternalServerError,
+			Status:    httpCode,
 			Success:   false,
-			Message:   "Error generating token.",
-			ErrorCode: errors.ServerError,
+			Message:   errorMsg,
+			ErrorCode: err.Error(),
 		}
 
 		response.JSON(w)
@@ -40,7 +45,7 @@ func GenerateToken(w http.ResponseWriter, r *http.Request) {
 		Success: true,
 		Message: "Successfully generated the token.",
 		Data: &types.GenerateTokenResponse{
-			AccessToken: token,
+			AccessToken: res,
 		},
 	}
 

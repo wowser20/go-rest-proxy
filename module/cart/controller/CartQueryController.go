@@ -8,12 +8,16 @@ import (
 
 	"go-rest-proxy/internal/errors"
 	"go-rest-proxy/internal/viewmodels"
-	"go-rest-proxy/utils/api/dummyjson"
+	"go-rest-proxy/module/cart/service"
 )
 
+type CartQueryController struct {
+	service.CartQueryService
+}
+
 // GetCarts gets all carts
-func GetCarts(w http.ResponseWriter, r *http.Request) {
-	res, err := dummyjson.GetDummyCarts()
+func (controller *CartQueryController) GetCarts(w http.ResponseWriter, r *http.Request) {
+	res, err := controller.CartQueryService.GetCarts()
 	if err != nil {
 		var httpCode int
 		var errorMsg string
@@ -49,7 +53,7 @@ func GetCarts(w http.ResponseWriter, r *http.Request) {
 }
 
 // GetCartByID gets a cart by id
-func GetCartByID(w http.ResponseWriter, r *http.Request) {
+func (controller *CartQueryController) GetCartByID(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 
 	cartID, err := strconv.Atoi(id)
@@ -65,7 +69,7 @@ func GetCartByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res, err := dummyjson.GetDummyCartByID(cartID)
+	res, err := controller.CartQueryService.GetCartByID(cartID)
 	if err != nil {
 		var httpCode int
 		var errorMsg string

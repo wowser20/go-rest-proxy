@@ -22,6 +22,11 @@ import (
 
 // InitializeRouter initializes router and routes
 func InitializeRouter() *chi.Mux {
+	// initialize controllers
+	iamCommandController := iamController.IAMCommandController{}
+	cartQueryController := cartController.CartQueryController{}
+	productQueryController := productController.ProductQueryController{}
+
 	// create router
 	r := chi.NewRouter()
 
@@ -62,7 +67,7 @@ func InitializeRouter() *chi.Mux {
 			// iam endpoints
 			r.Group(func(r chi.Router) {
 				r.Route("/iam", func(r chi.Router) {
-					r.Post("/generate-token", iamController.GenerateToken)
+					r.Post("/generate-token", iamCommandController.GenerateToken)
 				})
 			})
 
@@ -72,14 +77,14 @@ func InitializeRouter() *chi.Mux {
 
 				// cart endpoints
 				r.Route("/cart", func(r chi.Router) {
-					r.Get("/list", cartController.GetCarts)
-					r.Get("/{id}", cartController.GetCartByID)
+					r.Get("/list", cartQueryController.GetCarts)
+					r.Get("/{id}", cartQueryController.GetCartByID)
 				})
 
 				// product endpoints
 				r.Route("/product", func(r chi.Router) {
-					r.Get("/list", productController.GetProducts)
-					r.Get("/{id}", productController.GetProductByID)
+					r.Get("/list", productQueryController.GetProducts)
+					r.Get("/{id}", productQueryController.GetProductByID)
 				})
 			})
 		})

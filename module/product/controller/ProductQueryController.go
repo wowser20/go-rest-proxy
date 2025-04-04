@@ -1,4 +1,4 @@
-package handler
+package controller
 
 import (
 	"net/http"
@@ -8,12 +8,16 @@ import (
 
 	"go-rest-proxy/internal/errors"
 	"go-rest-proxy/internal/viewmodels"
-	"go-rest-proxy/utils/api/dummyjson"
+	"go-rest-proxy/module/product/service"
 )
 
+type ProductQueryController struct {
+	service.ProductQueryService
+}
+
 // GetProducts gets all products
-func GetProducts(w http.ResponseWriter, r *http.Request) {
-	result, err := dummyjson.GetDummyProducts()
+func (controller *ProductQueryController) GetProducts(w http.ResponseWriter, r *http.Request) {
+	result, err := controller.ProductQueryService.GetProducts()
 	if err != nil {
 		var httpCode int
 		var errorMsg string
@@ -49,7 +53,7 @@ func GetProducts(w http.ResponseWriter, r *http.Request) {
 }
 
 // GetProductByID gets a product by id
-func GetProductByID(w http.ResponseWriter, r *http.Request) {
+func (controller *ProductQueryController) GetProductByID(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 
 	productID, err := strconv.Atoi(id)
@@ -65,7 +69,7 @@ func GetProductByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result, err := dummyjson.GetDummyProductByID(productID)
+	result, err := controller.ProductQueryService.GetProductByID(productID)
 	if err != nil {
 		var httpCode int
 		var errorMsg string
