@@ -11,8 +11,8 @@ import (
 	"go-rest-proxy/utils/api/dummyjson"
 )
 
-// GetDummyProducts gets all products
-func GetDummyProducts(w http.ResponseWriter, r *http.Request) {
+// GetProducts gets all products
+func GetProducts(w http.ResponseWriter, r *http.Request) {
 	result, err := dummyjson.GetDummyProducts()
 	if err != nil {
 		var httpCode int
@@ -48,8 +48,8 @@ func GetDummyProducts(w http.ResponseWriter, r *http.Request) {
 	response.JSON(w)
 }
 
-// GetDummyProductByID gets a product by id
-func GetDummyProductByID(w http.ResponseWriter, r *http.Request) {
+// GetProductByID gets a product by id
+func GetProductByID(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 
 	productID, err := strconv.Atoi(id)

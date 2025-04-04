@@ -15,9 +15,9 @@ import (
 	"go-rest-proxy/interfaces/rest/middlewares/cors"
 	jwt "go-rest-proxy/interfaces/rest/middlewares/iam"
 	"go-rest-proxy/internal/viewmodels"
-	cartHandler "go-rest-proxy/module/cart/handler"
-	iamHandler "go-rest-proxy/module/iam/handler"
-	productHandler "go-rest-proxy/module/product/handler"
+	cartController "go-rest-proxy/module/cart/controller"
+	iamController "go-rest-proxy/module/iam/controller"
+	productController "go-rest-proxy/module/product/controller"
 )
 
 // InitializeRouter initializes router and routes
@@ -62,7 +62,7 @@ func InitializeRouter() *chi.Mux {
 			// iam endpoints
 			r.Group(func(r chi.Router) {
 				r.Route("/iam", func(r chi.Router) {
-					r.Post("/generate-token", iamHandler.GenerateToken)
+					r.Post("/generate-token", iamController.GenerateToken)
 				})
 			})
 
@@ -72,14 +72,14 @@ func InitializeRouter() *chi.Mux {
 
 				// cart endpoints
 				r.Route("/cart", func(r chi.Router) {
-					r.Get("/list", cartHandler.GetDummyCarts)
-					r.Get("/{id}", cartHandler.GetDummyCartByID)
+					r.Get("/list", cartController.GetCarts)
+					r.Get("/{id}", cartController.GetCartByID)
 				})
 
 				// product endpoints
 				r.Route("/product", func(r chi.Router) {
-					r.Get("/list", productHandler.GetDummyProducts)
-					r.Get("/{id}", productHandler.GetDummyProductByID)
+					r.Get("/list", productController.GetProducts)
+					r.Get("/{id}", productController.GetProductByID)
 				})
 			})
 		})

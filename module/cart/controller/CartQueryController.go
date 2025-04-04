@@ -11,8 +11,8 @@ import (
 	"go-rest-proxy/utils/api/dummyjson"
 )
 
-// GetDummyCarts gets all carts
-func GetDummyCarts(w http.ResponseWriter, r *http.Request) {
+// GetCarts gets all carts
+func GetCarts(w http.ResponseWriter, r *http.Request) {
 	res, err := dummyjson.GetDummyCarts()
 	if err != nil {
 		var httpCode int
@@ -48,8 +48,8 @@ func GetDummyCarts(w http.ResponseWriter, r *http.Request) {
 	response.JSON(w)
 }
 
-// GetDummyCartByID gets a cart by id
-func GetDummyCartByID(w http.ResponseWriter, r *http.Request) {
+// GetCartByID gets a cart by id
+func GetCartByID(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 
 	cartID, err := strconv.Atoi(id)

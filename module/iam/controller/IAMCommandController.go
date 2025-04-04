@@ -9,7 +9,7 @@ import (
 
 	"go-rest-proxy/internal/errors"
 	"go-rest-proxy/internal/viewmodels"
-	"go-rest-proxy/module/iam/handler/types"
+	"go-rest-proxy/module/iam/controller/types"
 )
 
 // GenerateToken generates a jwt token
