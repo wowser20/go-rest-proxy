@@ -12,7 +12,7 @@ If you want to check the OpenAPI Documentation and test out the endpoints, you c
 - https://staging-api-rest-proxy.aer-tech.org/docs/
 (make sure to use the staging url in the servers dropdown in the documentation)
 
-# How to run locally
+# Run locally
 
 Initialize the environment variables, .env file
 
