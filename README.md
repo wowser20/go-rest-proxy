@@ -9,7 +9,7 @@ I made this to familiarize the proxy implementation using REST API for the endpo
 
 
 If you want to check the OpenAPI Documentation and test out the endpoints, you can visit the following URL: 
-- https://staging-api-rest-proxy.aer-tech.org/docs/
+- https://staging-api-rest-proxy.aer-tech.me/docs/
 (not available atm - just access it locally)
 
 # Run locally
