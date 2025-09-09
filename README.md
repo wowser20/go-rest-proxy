@@ -1,5 +1,5 @@
 # go-rest-proxy
-A simple forward proxy server intended to secure client HTTP requests with JWT authentication utilizes https://dummyjson.com/ for the dummy API responses.
+A simple forward proxy server intended to secure client HTTP requests with JWT authentication proxies the https://dummyjson.com/ for the API responses.
 
 I made this to familiarize the proxy implementation using REST API for the endpoints, as well as applying CLEAN architecture for the project structure, I haven't implemented dependency injection for this cause I want this to be as simple as possible since this is just a personal project for learning purposes.
 
