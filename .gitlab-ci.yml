@@ -1,0 +1,6 @@
+stages:
+- test
+
+test:
+  script:
+    - echo 'Testing!'
