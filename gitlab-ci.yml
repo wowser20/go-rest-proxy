@@ -1,10 +1,16 @@
 stages:
-- test
+  - test
 
-on-pull-requests:
-  script: echo 'this should run on pull requests'
-
-test:
-  stage: test 
+test-on-push:
+  stage: test
   script:
-    - echo 'Testing!'
+    - echo 'Testing on push!'
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+test-on-mr:
+  stage: test
+  script:
+    - echo 'Testing on merge request!'
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
