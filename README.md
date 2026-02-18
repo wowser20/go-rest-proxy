@@ -6,7 +6,6 @@ I made this to familiarize the proxy implementation using REST API for the endpo
 ### What is a proxy?
 > A proxy, also called a forward proxy, routes traffic between clients and external systems, regulating it according to policies, masking IP addresses, enforcing security protocols, and blocking unknown traffic.
 
-
 If you want to check the OpenAPI Documentation and test out the endpoints, you can visit the following URL: 
 - https://staging-api-rest-proxy.aer-tech.me/docs/
 (not available atm - just access it locally)
