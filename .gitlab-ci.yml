@@ -1,0 +1,40 @@
+image: ubuntu:24.04
+
+stages:
+  - test
+  - build
+  - deploy
+
+variables:
+  GIT_STRATEGY: fetch
+  GIT_BRANCH: main
+
+before_script:
+  - apt-get update -y
+  - apt-get install -y make git golang-go curl docker.io docker-compose-v2
+  - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+  - export $(grep -v '^#' .env | xargs)
+  - echo "Running in environment: $API_ENV"
+  - git pull origin main
+  - make install
+
+test:
+  stage: test
+  script:
+    - make test
+
+build:
+  stage: build
+  script:
+    - make build
+  artifacts:
+    paths:
+      - bin/
+
+deploy:
+  stage: deploy
+  script:
+    - make up
+    - echo "Successfully deployed changes!"
+  environment:
+    name: $API_ENV
