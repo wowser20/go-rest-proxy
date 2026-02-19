@@ -12,5 +12,6 @@ test-on-mr:
   stage: test
   script:
     - echo 'Testing on merge request!'
+    - echo 'Testing'
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
