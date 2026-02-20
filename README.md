@@ -3,6 +3,7 @@ A simple forward proxy server intended to secure client HTTP requests with JWT a
 
 I made this to familiarize the proxy implementation using REST API for the endpoints, as well as applying CLEAN architecture for the project structure. I haven't implemented dependency injection for this case, because I want this to be as simple as possible, since this is just a personal project for learning purposes.
 
+
 ### What is a proxy?
 > A proxy, also called a forward proxy, routes traffic between clients and external systems, regulating it according to policies, masking IP addresses, enforcing security protocols, and blocking unknown traffic.
 
