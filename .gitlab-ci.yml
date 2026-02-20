@@ -5,3 +5,4 @@ test:
   stage: test
   script:
     - echo 'Testing!'
+    - echo 'Testing again!'
